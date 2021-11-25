@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.jaken.quizapp.domain.model.Answer"/>
+        <variable
+            name="viewmodel"
+            type="com.jaken.quizapp.ui.quiz.QuizViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_grey">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewHighlight"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/teal_corner_radius_bg"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progress_dialog_progressbar"
+                style="?android:attr/progressBarStyleInverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="false"
+                android:indeterminateTint="@color/purple_700"
+                android:indeterminateTintMode="src_in"
+                android:visibility="@{viewmodel.state.isLoading ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:text="@{viewmodel.state.activeQuestion.question}"
+                android:visibility="@{viewmodel.state.isLoading ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="This is a question for the user that is playing this quizapp?" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAnswerA"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/quiz_answer_button_height"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_corner_radius_item_bg"
+            android:visibility="@{viewmodel.state.activeQuestion.answers[0] != null ? View.VISIBLE : View.INVISIBLE}"
+            android:onClick="@{() -> viewmodel.answerButtonPressed(Answer.A)}"
+            android:text="@{viewmodel.state.activeQuestion.answers[0]}"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAnswerB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCountdownTimer"
+            tools:text="Answer A"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAnswerB"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/quiz_answer_button_height"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_corner_radius_item_bg"
+            android:visibility="@{viewmodel.state.activeQuestion.answers[1] != null ? View.VISIBLE : View.INVISIBLE}"
+            android:onClick="@{() -> viewmodel.answerButtonPressed(Answer.B)}"
+            android:text="@{viewmodel.state.activeQuestion.answers[1]}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonAnswerA"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCountdownTimer"
+            tools:text="Answer B"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAnswerC"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/quiz_answer_button_height"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_corner_radius_item_bg"
+            android:visibility="@{viewmodel.state.activeQuestion.answers[2] != null ? View.VISIBLE : View.INVISIBLE}"
+            android:text="@{viewmodel.state.activeQuestion.answers[2]}"
+            android:onClick="@{() -> viewmodel.answerButtonPressed(Answer.C)}"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAnswerD"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAnswerA"
+            tools:text="Answer C"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAnswerD"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/quiz_answer_button_height"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_corner_radius_item_bg"
+            android:visibility="@{viewmodel.state.activeQuestion.answers[3] != null ? View.VISIBLE : View.INVISIBLE}"
+            android:text="@{viewmodel.state.activeQuestion.answers[3]}"
+            android:onClick="@{() -> viewmodel.answerButtonPressed(Answer.D)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buttonAnswerC"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAnswerB"
+            tools:text="Answer D"/>
+
+        <TextView
+            android:id="@+id/textViewCountdownTimer"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
+            android:text="@{Integer.toString(viewmodel.state.countdownTimerValue) + ` seconds left to answer`}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewHighlight"
+            tools:text="13 seconds left"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonFiftyFifty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_corner_radius_item_bg"
+            android:visibility="@{viewmodel.state.fiftyFiftyLifelineAvailable &amp;&amp; viewmodel.state.countdownRunning ? View.VISIBLE : View.GONE}"
+            android:onClick="@{() -> viewmodel.fiftyFiftyButtonPressed()}"
+            android:text="@string/fifty_fifty"
+            app:layout_constraintBottom_toTopOf="@+id/buttonAddTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonAddTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:textColor="@color/white"
+            android:background="@drawable/purple_corner_radius_item_bg"
+            android:visibility="@{viewmodel.state.countdownTimerLifelineAvailable &amp;&amp; viewmodel.state.countdownRunning ? View.VISIBLE : View.GONE}"
+            android:onClick="@{() -> viewmodel.addTimeButtonPressed()}"
+            android:text="@string/add_time_10_sec"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

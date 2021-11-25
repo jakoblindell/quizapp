@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">quizapp</string>
+    <string name="empty" />
+    <string name="ready_to_start">Are you ready to start the quiz?</string>
+    <string name="start">Start</string>
+    <string name="question_answer_correct">You answered correctly!</string>
+    <string name="ok">OK</string>
+    <string name="next_question">Next question</string>
+    <string name="question_answer_wrong">Your answer was wrong.</string>
+    <string name="question_timer_ran_out">You ran out of time.</string>
+    <string name="quiz_finished_title">You finished!</string>
+    <string name="quiz_finished_body">You finished the quiz and scored %1$s out of %2$s. Average time spent on the questions was %3$s second(s).</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_time_10_sec">Add time (+10 sec)</string>
+    <string name="fifty_fifty">50/50</string>
+</resources>
